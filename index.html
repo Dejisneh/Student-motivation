@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Motivation</title>
+
+    <style>
+        body {
+    background-color: #007bff;
+    color: white;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px; /* added padding for small screens */
+}
+
+.box {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;       /* responsive width */
+    max-width: 360px; /* limit for bigger screens */
+    position: relative;
+}
+
+h2 {
+    margin-bottom: 18px;
+    font-size: 20px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.4;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+}
+
+/* Mute button responsive */
+#muteBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    color: #007bff;
+    font-size: 13px;
+    padding: 5px 8px;
+    border-radius: 6px;
+}
+
+/* Optional: smaller font for really tiny screens */
+@media (max-width: 350px) {
+    h2 {
+        font-size: 18px;
+    }
+    p {
+        font-size: 14px;
+    }
+    #muteBtn {
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Student Motivation 💡</h2>
+    <p id="quote">Stay focused. Your future is watching.</p>
+    <button id="muteBtn">🔇 Mute</button>
+</div>
+
+<script>
+    const quotes = [
+        "Stay focused. Your future is watching.",
+        "Those A's will not come by magic.",
+        "Consistency beats last-minute studying.",
+        "Read today so tomorrow is easier.",
+        "Small progress every day adds up.",
+        "Discipline now creates freedom later.",
+        "Success is built during the days you feel unmotivated.",
+        "Your degree will not earn itself.",
+        "Effort today saves regret tomorrow.",
+        "Dreams work only when you do."
+    ];
+
+    let isMuted = false; // Track mute state
+    const quoteElement = document.getElementById("quote");
+    const muteBtn = document.getElementById("muteBtn");
+
+    function speakQuote(text) {
+        if (isMuted) return; // Do nothing if muted
+        const speech = new SpeechSynthesisUtterance(text);
+        speech.lang = "en-US";
+        speech.rate = 0.95;
+        speech.pitch = 1;
+        window.speechSynthesis.speak(speech);
+    }
+
+    function generateQuote() {
+        // Fade out
+        quoteElement.style.opacity = 0;
+
+        setTimeout(() => {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quoteText = quotes[randomIndex];
+            quoteElement.textContent = quoteText;
+
+            // Fade in
+            quoteElement.style.opacity = 1;
+
+            // Speak
+            window.speechSynthesis.cancel();
+            speakQuote(quoteText);
+        }, 800); // Match fade transition
+    }
+
+    // Change quote every 3 seconds
+    setInterval(generateQuote, 3000);
+
+    // Mute / Unmute button
+    muteBtn.addEventListener("click", () => {
+        isMuted = !isMuted;
+        if (isMuted) {
+            window.speechSynthesis.cancel(); // stop current speech
+            muteBtn.textContent = "🔊 Unmute";
+        } else {
+            muteBtn.textContent = "🔇 Mute";
+        }
+    });
+</script>
+
+</body>
+</html>
