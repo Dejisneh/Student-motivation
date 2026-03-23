@@ -1,25 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Motivation</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Motivation · StudyFuel</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+<div class="glow"></div>
+
 <nav>
-  <a href="index.html">Home</a> |
-  <a href="motivation.html">Motivation</a> |
-  <a href="study-tips.html">Study Tips</a> |
-  <a href="about.html">About</a> |
-  <a href="contact.html">Contact</a>
+  <a href="index.html" class="nav-logo">StudyFuel ⚡</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="motivation.html" class="active">Motivation</a></li>
+    <li><a href="study-tips.html">Study Tips</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-<hr>
 
-<h1>Daily Motivation</h1>
+<main>
+  <section class="hero">
+    <div class="hero-tag fade-up">Words that move you</div>
+    <h1 class="fade-up">Daily <em>Motivation</em></h1>
+    <p class="fade-up">Read one. Let it sink in. Then go do the work.</p>
+  </section>
 
-<p>“Success is the sum of small efforts repeated day in and day out.”</p>
-<p>“Don’t watch the clock; do what it does. Keep going.”</p>
-<p>“Your future is created by what you do today, not tomorrow.”</p>
+  <hr class="divider" />
+
+  <section class="section">
+    <div class="section-label">Quotes</div>
+    <h2>Fuel for the grind</h2>
+    <p>Come back here whenever you need a reminder of why you started.</p>
+
+    <div class="quote-card fade-up">
+      <p>"Success is the sum of small efforts repeated day in and day out."</p>
+    </div>
+    <div class="quote-card fade-up">
+      <p>"Don't watch the clock; do what it does. Keep going."</p>
+    </div>
+    <div class="quote-card fade-up">
+      <p>"Your future is created by what you do today, not tomorrow."</p>
+    </div>
+    <div class="quote-card fade-up">
+      <p>"A little progress each day adds up to big results."</p>
+    </div>
+    <div class="quote-card fade-up">
+      <p>"Discipline is choosing between what you want now and what you want most."</p>
+    </div>
+    <div class="quote-card fade-up">
+      <p>"The secret of getting ahead is getting started."</p>
+    </div>
+
+    <div style="margin-top:2.5rem;">
+      <a href="study-tips.html" class="btn btn-primary">Next: Study Tips →</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Made with 💛 for students everywhere · <a href="about.html">About</a> · <a href="contact.html">Contact</a></p>
+</footer>
+
+<script>
+  const btn = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  btn.addEventListener('click', () => links.classList.toggle('open'));
+</script>
 
 </body>
 </html>

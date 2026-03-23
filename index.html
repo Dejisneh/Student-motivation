@@ -1,149 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Student Motivation</title>
-
-    <style>
-        body {
-    background-color: #007bff;
-    color: white;
-    font-family: Arial, sans-serif;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px; /* added padding for small screens */
-}
-
-.box {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 25px;
-    border-radius: 12px;
-    text-align: center;
-    width: 90%;       /* responsive width */
-    max-width: 360px; /* limit for bigger screens */
-    position: relative;
-}
-
-h2 {
-    margin-bottom: 18px;
-    font-size: 20px;
-}
-
-p {
-    font-size: 16px;
-    line-height: 1.4;
-    opacity: 1;
-    transition: opacity 0.8s ease;
-}
-
-/* Mute button responsive */
-#muteBtn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: white;
-    color: #007bff;
-    font-size: 13px;
-    padding: 5px 8px;
-    border-radius: 6px;
-}
-
-/* Optional: smaller font for really tiny screens */
-@media (max-width: 350px) {
-    h2 {
-        font-size: 18px;
-    }
-    p {
-        font-size: 14px;
-    }
-    #muteBtn {
-        font-size: 12px;
-        padding: 4px 6px;
-    }
-}
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Motivation 💡</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <nav>
-  <a href="index.html">Home</a> |
-  <a href="motivation.html">Motivation</a> |
-  <a href="study-tips.html">Study Tips</a> |
-  <a href="about.html">About</a> |
-  <a href="contact.html">Contact</a>
+
+<div class="glow"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">StudyFuel ⚡</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="motivation.html">Motivation</a></li>
+    <li><a href="study-tips.html">Study Tips</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-<hr>
 
+<main>
+  <section class="hero">
+    <div class="hero-tag fade-up">Your academic journey starts here</div>
+    <h1 class="fade-up">Stay focused.<br><em>Your future</em> is watching.</h1>
+    <p class="fade-up">Fuel your ambition with daily motivation, proven study strategies, and the mindset to achieve anything you set out to do.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="fade-up">
+      <a href="motivation.html" class="btn btn-primary">Get Motivated →</a>
+      <a href="study-tips.html" class="btn btn-outline">Study Tips</a>
+    </div>
+  </section>
 
-<div class="box">
-    <h2>Student Motivation 💡</h2>
-    <p id="quote">Stay focused. Your future is watching.</p>
-    <button id="muteBtn">🔇 Mute</button>
-</div>
+  <hr class="divider" />
+
+  <section class="section">
+    <div class="section-label">What's inside</div>
+    <h2>Everything you need to succeed</h2>
+    <p>Three pillars to help you stay consistent, focused, and ready to conquer your academic goals.</p>
+    <div class="grid">
+      <div class="card fade-up">
+        <div class="card-icon">🔥</div>
+        <h3>Daily Motivation</h3>
+        <p>Powerful quotes and reminders to keep your drive alive — especially on the hard days.</p>
+      </div>
+      <div class="card fade-up">
+        <div class="card-icon">📚</div>
+        <h3>Study Strategies</h3>
+        <p>Proven techniques like time-blocking, active recall, and spaced repetition to learn smarter.</p>
+      </div>
+      <div class="card fade-up">
+        <div class="card-icon">🎯</div>
+        <h3>Goal Clarity</h3>
+        <p>Learn how to set, track, and actually achieve the academic goals that matter most to you.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Made with 💛 for students everywhere · <a href="about.html">About</a> · <a href="contact.html">Contact</a></p>
+</footer>
 
 <script>
-    const quotes = [
-        "Stay focused. Your future is watching.",
-        "Those A's will not come by magic.",
-        "Consistency beats last-minute studying.",
-        "Read today so tomorrow is easier.",
-        "Small progress every day adds up.",
-        "Discipline now creates freedom later.",
-        "Success is built during the days you feel unmotivated.",
-        "Your degree will not earn itself.",
-        "Effort today saves regret tomorrow.",
-        "Dreams work only when you do."
-    ];
-
-    let isMuted = false; // Track mute state
-    const quoteElement = document.getElementById("quote");
-    const muteBtn = document.getElementById("muteBtn");
-
-    function speakQuote(text) {
-        if (isMuted) return; // Do nothing if muted
-        const speech = new SpeechSynthesisUtterance(text);
-        speech.lang = "en-US";
-        speech.rate = 0.95;
-        speech.pitch = 1;
-        window.speechSynthesis.speak(speech);
-    }
-
-    function generateQuote() {
-        // Fade out
-        quoteElement.style.opacity = 0;
-
-        setTimeout(() => {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            const quoteText = quotes[randomIndex];
-            quoteElement.textContent = quoteText;
-
-            // Fade in
-            quoteElement.style.opacity = 1;
-
-            // Speak
-            window.speechSynthesis.cancel();
-            speakQuote(quoteText);
-        }, 800); // Match fade transition
-    }
-
-    // Change quote every 3 seconds
-    setInterval(generateQuote, 3000);
-
-    // Mute / Unmute button
-    muteBtn.addEventListener("click", () => {
-        isMuted = !isMuted;
-        if (isMuted) {
-            window.speechSynthesis.cancel(); // stop current speech
-            muteBtn.textContent = "🔊 Unmute";
-        } else {
-            muteBtn.textContent = "🔇 Mute";
-        }
-    });
+  const btn = document.getElementById('hamburger');
+  const links = document.getElementById('navLinks');
+  btn.addEventListener('click', () => links.classList.toggle('open'));
 </script>
 
 </body>
 </html>
-
